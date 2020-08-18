@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATICFILES_DIRS = [
+    "/votingSystem/epoll/static/epoll/styles.css",
+]
+
 
 # Application definition
 

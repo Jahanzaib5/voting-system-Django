@@ -3,16 +3,16 @@
 {% block title%}Electronic Ballot System {% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-  {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-success" role="alert">
-      {{ message }}
-    </div>
-    {% endfor %}
-  {% endif %}
-  <h1>Welcome to The Electronic Ballot System</h1>
-  <h3>This is a sample Electronic Voting Application.</h3>
-</div>
+	<div class="jumbotron" id="home">
+	  {% if messages %}
+	    {% for message in messages %}
+	    <div class="alert alert-success" role="alert">
+	      {{ message }}
+	    </div>
+	    {% endfor %}
+	  {% endif %}
+	  <h1>Welcome To The Electronic Ballot System</h1>
+	  <h3>This is a sample Electronic Voting Application.</h3>
+	</div>
 
 {% endblock %}
