@@ -1,0 +1,31 @@
+{% extends "epoll/layout.html" %}
+
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h2>User Registration</h2>
+    {% if note %}
+      <h3 class="text text-muted">{{note}}</h3>
+    {% endif %}
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      {% for field in form %}
+        <div class="form-group">
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <ul>
+                <li>{{error}}</li>
+              </ul>
+            {% endfor %}
+          {% endif %}
+         
+        </div>
+      {% endfor %}
+      <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+    </form>
+  </div>
+
+{% endblock %}
