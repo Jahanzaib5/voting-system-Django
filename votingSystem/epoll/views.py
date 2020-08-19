@@ -20,7 +20,7 @@ def login_view(request):
 		user = authenticate(request, username=username, password=password)
 		if user is not None:
 			login(request, user)
-			return HttpResponseRedirect("dashboard")
+			return redirect("dashboard")
 		else:
 			return render(request, "epoll/login.html", {"message": "Invalid credentials."})
 	else:
@@ -43,3 +43,14 @@ def register_view(request):
         form = RegisterForm()
 
     return render(request, "epoll/register.html", {'form':form})
+
+
+
+@login_required
+def dashboard_view(request):
+	return render(request, "epoll/dashboard.html")
+
+@login_required
+def logout_view(request):
+	logout(request)
+	return redirect("home")

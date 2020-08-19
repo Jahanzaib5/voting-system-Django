@@ -1,0 +1,11 @@
+{% extends 'epoll/layout.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+	<div class="jumbotron" id='dash'>
+		<h2>Hi, {{request.user.get_full_name }}</h2>
+  		<h3><a href="">Click Here To Vote</a></h3>
+  		<h3><a href="">Click Here To See Result</a></h3>
+    </div>
+{% endblock %}
