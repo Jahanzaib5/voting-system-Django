@@ -1,0 +1,16 @@
+{% extends "epoll/layout.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="jumbotron"> 
+	<h2>Available Position For Vote</h2>
+  	<ul>
+    {% for i in obj %}
+    	<li><a href="{% url 'candidate' i.id %}">{{i.title}}</a></li>
+    {% empty %}
+    	<p>No Positions Available</p>
+    {% endfor %}
+  	</ul>
+ </div>
+{% endblock %}

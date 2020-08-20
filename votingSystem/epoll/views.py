@@ -54,3 +54,26 @@ def dashboard_view(request):
 def logout_view(request):
 	logout(request)
 	return redirect("home")
+
+@login_required
+def position_view(request):
+	position = Position.objects.all()
+	return render(request, 'epoll/position.html', {"obj": position})
+
+@login_required
+def candidate_view(request, pos):
+	obj=get_object_or_404(Position, pk=pos)
+	if request.method == 'POST':
+		temp = VoteStatus.objects.get_or_create(user=request.user, position=obj)[0]
+		if temp.status == False:
+			temp2.Candidate.objects.get(pk=request.POST.get(obj.title))
+			temp.no_votes+=1
+			temp2.save()
+			temp.status=True
+			temp.save()
+			return HttpResponseRedirect("/position/")
+		else:
+			messages.success(request, "You have already voted for this position!")
+			return render(request, 'epoll/candidate.html', {'obj': obj})
+	else:
+		return render(request, 'epoll/candidate.html', {'obj': obj})
