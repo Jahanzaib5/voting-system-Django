@@ -13,4 +13,5 @@ urlpatterns = [
 	path('candidate/detail/<int:id>/', views.candidateDetail_view, name="detail"),
 	path('results/', views.result_view, name='result'),
 	path('changePassword/', views.changePassword_view, name='changePassword'),
+	path('editProfile/', views.editProfile_view, name='editProfile'),
 ]

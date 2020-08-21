@@ -101,3 +101,14 @@ def changePassword_view(request):
 		form = PasswordChangeForm(user=request.user)
 
 	return render(request, "epoll/password.html", {'form': form})		
+
+@login_required
+def editProfile_view(request):
+	if request.method == 'POST':
+		form = ChangeForm(request.POST, instance=request.user)
+		if form.is_valid():
+			form.save()
+			return redirect('dashboard')
+	else:
+		form = ChangeForm(instance=request.user)
+	return render(request, 'epoll/edit_profile.html', {'form': form})
