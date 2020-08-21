@@ -66,8 +66,8 @@ def candidate_view(request, pos):
 	if request.method == 'POST':
 		temp = VoteStatus.objects.get_or_create(user=request.user, position=obj)[0]
 		if temp.status == False:
-			temp2.Candidate.objects.get(pk=request.POST.get(obj.title))
-			temp.no_votes+=1
+			temp2=Candidate.objects.get(pk=request.POST.get(obj.title))
+			temp2.no_votes+=1
 			temp2.save()
 			temp.status=True
 			temp.save()
@@ -77,3 +77,27 @@ def candidate_view(request, pos):
 			return render(request, 'epoll/candidate.html', {'obj': obj})
 	else:
 		return render(request, 'epoll/candidate.html', {'obj': obj})
+
+
+@login_required
+def candidateDetail_view(request, id):
+	obj=get_object_or_404(Candidate, pk=id)
+	return render(request, 'epoll/c_detail.html', {'obj': obj})
+
+@login_required
+def result_view(request):
+	obj = Candidate.objects.all().order_by('position', '-no_votes')
+	return render(request, "epoll/results.html", {'obj': obj})	
+
+@login_required
+def changePassword_view(request):
+	if request.method == "POST":
+		form = PasswordChangeForm(user=request.user, data=request.POST)
+		if form.is_valid():
+			form.save()
+			update_session_auth_hash(request, form.user)
+			return redirect('dashboard')
+	else:
+		form = PasswordChangeForm(user=request.user)
+
+	return render(request, "epoll/password.html", {'form': form})		
